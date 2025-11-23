@@ -9,7 +9,6 @@
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
 
-    {{-- HEADER --}}
     <header class="bg-white shadow-md">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-2">
@@ -29,7 +28,6 @@
         </div>
     </header>
 
-    {{-- MAIN CONTENT --}}
     <main class="max-w-7xl mx-auto px-6 py-6">
         @yield('content')
     </main>

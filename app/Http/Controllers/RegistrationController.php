@@ -50,37 +50,37 @@ class RegistrationController extends Controller
     }
 
     public function filter(Request $request)
-{
-    $kelasList = Kelas::all();
-    $participants = Participant::all();
+    {
+        $kelasList = Kelas::all();
+        $participants = Participant::all();
 
-    $selectedKelas = null;
-    $selectedParticipant = null;
-    $result = [];
+        $selectedKelas = null;
+        $selectedParticipant = null;
+        $result = [];
 
-    // Filter by kelas
-    if ($request->filled('kelas_id')) {
-        $selectedKelas = Kelas::with('registrations.participant')
-            ->find($request->kelas_id);
+        // Filter by kelas
+        if ($request->filled('kelas_id')) {
+            $selectedKelas = Kelas::with('registrations.participant')
+                ->find($request->kelas_id);
 
-        $result = $selectedKelas?->registrations ?? [];
+            $result = $selectedKelas?->registrations ?? [];
+        }
+
+        // Filter by peserta
+        if ($request->filled('participant_id')) {
+            $selectedParticipant = Participant::with('registrations.kelas')
+                ->find($request->participant_id);
+
+            $result = $selectedParticipant?->registrations ?? [];
+        }
+
+        return view('registrations.filter', compact(
+            'kelasList',
+            'participants',
+            'selectedKelas',
+            'selectedParticipant',
+            'result'
+        ));
     }
-
-    // Filter by peserta
-    if ($request->filled('participant_id')) {
-        $selectedParticipant = Participant::with('registrations.kelas')
-            ->find($request->participant_id);
-
-        $result = $selectedParticipant?->registrations ?? [];
-    }
-
-    return view('registrations.filter', compact(
-        'kelasList',
-        'participants',
-        'selectedKelas',
-        'selectedParticipant',
-        'result'
-    ));
-}
 
 }

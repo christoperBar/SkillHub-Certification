@@ -11,7 +11,7 @@ class Participant extends Model
 
     public function classes() {
         return $this->belongsToMany(Kelas::class, 'registrations', 'participant_id', 'kelas_id')
-            ->withPivot('registered_at')
+            ->withPivot('created_at')
             ->withTimestamps();
     }
 

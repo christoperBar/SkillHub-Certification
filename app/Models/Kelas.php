@@ -12,7 +12,7 @@ class Kelas extends Model
 
     public function participants() {
         return $this->belongsToMany(Participant::class, 'registrations', 'kelas_id', 'participant_id')
-            ->withPivot('registered_at')
+            ->withPivot('created_at')
             ->withTimestamps();
     }
     public function registrations() {
